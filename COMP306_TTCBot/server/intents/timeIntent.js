@@ -13,8 +13,23 @@ module.exports.process = function process(intentData, cb) {
     } 
 
     const location = intentData.location[0].value;
-    // const location = intentData.location[0].value.replace(/,.?iris/i, '');
+    request.get('https://myttc.ca/' + location + '_station.json', (err, response) => {
+            if(err || res.statusCode != 200 || !res.body.result) {
+                console.log(err);
+                console.log(res.body);
 
+                return cb(false, `I had a problem finding out the time in ${location}`);
+            }
+            console.log(location);
+            const result = response.body;
+            const nextString = result.stops[1].routes[result.stops[1].routes.length-3].stop_times[0].departure_time;
+            const timeString = moment.unix(timestamp + result.dstOffset + result.rawOffset).utc().format('dddd, MMMM Do YYYY, h:mm:ss a');
+
+            res.json({result: nextString});
+            return cb(false, `In ${location}, it is now ${nextString}`);
+    });
+    // const location = intentData.location[0].value.replace(/,.?iris/i, '');
+    /*
     request.get(`http://localhost:4010/service/${location}`, (err, res) => {
         if(err || res.statusCode != 200 || !res.body.result) {
             console.log(err);
@@ -24,5 +39,5 @@ module.exports.process = function process(intentData, cb) {
         }
 
         return cb(false, `In ${location}, it is now ${res.body.result}`);
-    });
+    });*/
 }
