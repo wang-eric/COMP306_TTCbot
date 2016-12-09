@@ -9,14 +9,14 @@ const server = http.createServer(service);
 server.listen(); // Dynamically selects port.
 
 server.on('listening', function() {
-    console.log(`FRANK-time is listening on ${server.address().port} in ${service.get('env')} mode. `);
+    console.log(`TTCBot-time is listening on ${server.address().port} in ${service.get('env')} mode. `);
 
     // Announce ourselves to the main application
     const announce = () => {
         request.put(`http://127.0.0.1:4000/service/time/${server.address().port}`, (err, res) => {
             if(err) {
                 console.log(err);
-                console.log("Error connecting to FRANK");
+                console.log("Error connecting to TTCbot");
                 return;
             }
 

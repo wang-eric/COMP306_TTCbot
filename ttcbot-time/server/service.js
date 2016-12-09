@@ -17,7 +17,7 @@ const moment = require('moment');
 service.get('/service/:location', (req, res, next) => {
 
         const location = req.params.location;
-        const timestamp = +moment().format('X');
+        //const timestamp = +moment().format('X');
 
         request.get('https://myttc.ca/' + location + '_station.json', (err, response) => {
             if (err) {
@@ -27,7 +27,7 @@ service.get('/service/:location', (req, res, next) => {
             console.log(location);
             const result = response.body;
             const nextString = result.stops[1].routes[result.stops[1].routes.length-3].stop_times[0].departure_time;
-            const timeString = moment.unix(timestamp + result.dstOffset + result.rawOffset).utc().format('dddd, MMMM Do YYYY, h:mm:ss a');
+            //const timeString = moment.unix(timestamp + result.dstOffset + result.rawOffset).utc().format('dddd, MMMM Do YYYY, h:mm:ss a');
 
             res.json({result: nextString});
         });

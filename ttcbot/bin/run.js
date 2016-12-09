@@ -13,9 +13,9 @@ const witClient = require('../server/witClient')(witToken);
 //slack bot - FRANK
 //xoxb-106871034272-rPIrkg3UdVOV3sU5USmrax9H
 //slack bot - ttc
-//xoxb-110070002308-9Uatw2GPlP8XaxxjLCetSVJ7
+//xoxb-110070002308-GFBJocpKsSPDHvOTqcU6A55h
 //xoxb-110382865168-TJvlLcIMqhrMxXY9PA3GEehZ
-const slackToken = 'xoxb-110070002308-9Uatw2GPlP8XaxxjLCetSVJ7';
+const slackToken = 'xoxb-110070002308-GFBJocpKsSPDHvOTqcU6A55h';
 const slackLogLevel = 'verbose';
 
 const rtm = slackClient.init(slackToken, slackLogLevel, witClient);
