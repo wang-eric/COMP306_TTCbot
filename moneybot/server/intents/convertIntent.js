@@ -24,7 +24,7 @@ module.exports.process = function process(intentData, cb) {
         const rates = response.body.rates;
         var result;
         if (Object.keys(rates).indexOf(output_currency) >= 0) {
-            result = rates[output_currency];
+            result = Math.round(rates[output_currency]*amount*100)/100;
         } else {
             result = "Not found";
         }
