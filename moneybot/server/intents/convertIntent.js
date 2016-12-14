@@ -5,11 +5,11 @@ const request = require('superagent');
 
 module.exports.process = function process(intentData, cb) {
     if (intentData.intent[0].value != 'convert') {
-        return cb(new Error(`Expected time intent, got ${intentData.intent[0].value}`));
+        return cb(new Error(`Expected convert intent, got ${intentData.intent[0].value}`));
     }
 
     if (!intentData.input_currency) {
-        return cb(new Error('Missing input or output currency in time intent'));
+        return cb(new Error('Missing input or output currency in convert intent'));
     }
     const amount = intentData.number[0].value;
     const input_currency = intentData.input_currency[0].value;
@@ -20,17 +20,15 @@ module.exports.process = function process(intentData, cb) {
             console.log(err);
             return res.sendStatus(500);
         }
-        console.log(input_currency);
+        console.log(response.body);
         const rates = response.body.rates;
         var result;
         if (Object.keys(rates).indexOf(output_currency) >= 0) {
-            console.log(input_currency);
-            console.log(output_currency);
-            console.log(rates);
             result = Math.round(rates[output_currency]*amount*100)/100;
+            return cb(false, `${amount} ${input_currency} is ${result} ${output_currency} `);
         } else {
-            result = "Not found";
+            return cb(false, `Sorry, I do not know the exchange rate between ${input_currency} and ${output_currency}.`);
         }
-        return cb(false, `${amount} ${input_currency} is ${result} ${output_currency} `);
+        
     });
 }

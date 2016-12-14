@@ -5,11 +5,11 @@ const request = require('superagent');
 
 module.exports.process = function process(intentData, cb) {
     if (intentData.intent[0].value != 'exchange rate') {
-        return cb(new Error(`Expected time intent, got ${intentData.intent[0].value}`));
+        return cb(new Error(`Expected exchange rate intent, got ${intentData.intent[0].value}`));
     }
 
     if (!intentData.input_currency) {
-        return cb(new Error('Missing input or output currency in time intent'));
+        return cb(new Error('Missing input or output currency in exchange rate intent'));
     }
     const input_currency = intentData.input_currency[0].value;
     const output_currency = intentData.input_currency[1].value;
@@ -27,9 +27,10 @@ module.exports.process = function process(intentData, cb) {
             console.log(output_currency);
             console.log(rates);
             result = rates[output_currency];
+            return cb(false, `The exchange rate from ${input_currency} to ${output_currency} is ${result}.`);
         } else {
-            result = "Not found";
+            return cb(false, `Sorry, I do not know the exchange rate from ${input_currency} to ${output_currency}.`);;
         }
-        return cb(false, `The exchange rate from ${input_currency} to ${output_currency} is ${result}.`);
+        
     });
 }
