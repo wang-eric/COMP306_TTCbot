@@ -27,9 +27,9 @@ module.exports.process = function process(intentData, cb) {
             console.log(output_currency);
             console.log(rates);
             result = rates[output_currency];
-            return cb(false, `The exchange rate from ${input_currency} to ${output_currency} is ${result}.`);
+            return cb(false, `The exchange rate from ${input_currency} to ${output_currency} is ${result}. :smiley:`);
         } else {
-            return cb(false, `Sorry, I do not know the exchange rate from ${input_currency} to ${output_currency}.`);;
+            return cb(false, `Sorry, I do not know the exchange rate from ${input_currency} to ${output_currency}. :hushed:`);;
         }
         
     });

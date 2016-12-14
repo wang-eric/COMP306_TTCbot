@@ -39,7 +39,7 @@ function handleOnMessage(message) {
             catch (err) {
                 console.log(err);
                 console.log(res);
-                rtm.sendMessage("Sorry, I don't know what you are talking about", message.channel);
+                rtm.sendMessage("Sorry, it doesn't look like anything to me.:simple_smile:", message.channel);
             }
         });
     }

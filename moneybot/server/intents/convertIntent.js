@@ -25,9 +25,9 @@ module.exports.process = function process(intentData, cb) {
         var result;
         if (Object.keys(rates).indexOf(output_currency) >= 0) {
             result = Math.round(rates[output_currency]*amount*100)/100;
-            return cb(false, `${amount} ${input_currency} is ${result} ${output_currency} `);
+            return cb(false, `${amount} ${input_currency} is ${result} ${output_currency} :smile:`);
         } else {
-            return cb(false, `Sorry, I do not know the exchange rate between ${input_currency} and ${output_currency}.`);
+            return cb(false, `Sorry, I do not know the exchange rate between ${input_currency} and ${output_currency}. :hushed:`);
         }
         
     });
